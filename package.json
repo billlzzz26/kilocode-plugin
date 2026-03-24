@@ -7,5 +7,13 @@
   "type": "module",
   "scripts": {
     "release": "npm publish --access public"
+  },
+  "module": "index.ts",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
   }
 }
