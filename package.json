@@ -1,1 +1,11 @@
-# package.json
+{
+  "name": "kilo-plugin",
+  "version": "1.0.0",
+  "bin": {
+    "kilo-toolkit": "./bin/create-kilo-setup.mjs"
+  },
+  "type": "module",
+  "scripts": {
+    "release": "npm publish --access public"
+  }
+}
