@@ -113,5 +113,3 @@ $ npx kilo-toolkit my-app   # copy ลงโฟลเดอร์ my-app
    slug: frontend-specialist 
    ต้องการเพิ่ม groups หรือปรับ roleDefinition ไหมครับ?"
 ```
-
----
