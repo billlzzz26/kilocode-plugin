@@ -11,7 +11,8 @@
   "module": "index.ts",
   "private": true,
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "shadcn": "^4.1.0"
   },
   "peerDependencies": {
     "typescript": "^5"
