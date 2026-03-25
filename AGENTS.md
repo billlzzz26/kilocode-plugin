@@ -22,7 +22,7 @@ kilo-toolkit/
 ### 2. **เมื่อผู้ใช้รัน `npx kilo-toolkit`**
 
 ```
-1. อ่าน process.argv เพื่อหา target directory [youtube](https://www.youtube.com/watch?v=1n6PtOWTVDg)
+1. อ่าน process.argv เพื่อหา target directory
 2. Copy โฟลเดอร์ template/ ทั้งหมดไปยัง target directory
 3. สร้าง .kilocode/, .kilocodemodes, README.md ในโปรเจ็กต์ปลายทาง
 4. แสดงข้อความ "Kilo toolkit template copied to [path]"
@@ -113,3 +113,29 @@ $ npx kilo-toolkit my-app   # copy ลงโฟลเดอร์ my-app
    slug: frontend-specialist 
    ต้องการเพิ่ม groups หรือปรับ roleDefinition ไหมครับ?"
 ```
+
+---
+
+## 📝 โน๊ตข้อผิดพลาดและ待处理事项
+
+### ข้อผิดพลาดที่พบ
+
+1. **YAML Error ใน `.kilocode/agents/topic-tagger.yaml`**
+   - Thai characters ใน YAML keys ทำให้เกิด parse error
+   - สถานะ: ยังไม่ได้แก้ไข
+
+### 待处理事项
+
+1. **แก้ไข YAML Error ใน `topic-tagger.yaml`** - High Priority
+2. **ทดสอบ Custom Modes 3 ตัว (orchestrator, prompt-architect, frontend-workflow)** - High Priority
+3. **สร้างเอกสาร README.md เพิ่มเติม** - Medium Priority
+4. **อัปเดต prompt-architect.yaml subagent ให้ใช้ได้จริง** - Medium Priority
+
+### สิ่งที่ทำเสร็จแล้ว
+
+- เพิ่ม orchestrator mode ใน `.kilocodemodes`
+- สร้าง prompt-architect subagent
+- เพิ่ม Prompt Architect v2.5.0 logic ครบ 11 โมดูล
+- สร้าง frontend-workflow.md และ frontend-specialist skill
+- ลบ ## ### ออกจาก customInstructions
+- สร้าง README.md ใหม่พร้อมโน๊ตข้อผิดพลาด
