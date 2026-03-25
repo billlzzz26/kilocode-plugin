@@ -1,0 +1,27 @@
+{
+  "chat.mcp.gallery.enabled": true,
+  "editor.defaultFormatter": "kilocode.kilo-code",
+  "kilo-code.allowedCommands": [
+    "git log",
+    "git diff",
+    "git show",
+    "which",
+    "bun",
+    "bun --version",
+    "~/.bun/bin/bun",
+    "~/.bun/bin/bun install",
+    "~/.bun/bin/bun run --help",
+    "~/.bun/bin/bun run"
+  ],
+  "kilo-code.deniedCommands": [],
+  "keyboard.layout": "0000041E",
+  "workbench.productIconTheme": "developer-icons",
+  "git.autofetch": true,
+  "remoteHub.commitDirectlyWarning": "off",
+  "markdownlint.config": {
+    
+
+  },
+  "markdownlint.severityForWarning": "Warning",
+  "markdownlint.severityForError": "Error"
+}
