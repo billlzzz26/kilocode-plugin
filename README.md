@@ -4,28 +4,41 @@
 
 Repo นี้เป็น **Kilo Code Toolkit** สำหรับแชร์ skills, custom modes, rules, subagents, workflows แบบกลาง สามารถดึงใช้ด้วย `npx kilo-toolkit`
 
-## โครงสร้าง
+## โครงสร้างปัจจุบัน
 
 ```
 kilo-toolkit/
-├── package.json          # npx entry point
-├── bin/create-kilo-setup.mjs  # สคริปต์ติดตั้ง template
-├── template/             # ไฟล์ที่จะ copy ไปโปรเจ็กต์ปลายทาง
-│   ├── .kilocode/        # Skills, rules, subagents, workflows
-│   ├── .kilocodemodes    # Custom modes (JSON format)
-│   └── README.md
-└── .github/workflows/release.yml
+├── package.json          # จุด entry ของ npx kilo-toolkit
+├── README.md             # เอกสารภาพรวม (ไฟล์นี้)
+├── AGENTS.md             # คู่มือปฏิบัติงานของเอเจนต์
+├── agents/               # Agent templates (YAML/MD) ที่จะส่งต่อให้ผู้ใช้
+├── skills/               # แต่ละ skill มี SKILL.md เป็นแกนหลัก
+├── subagents/            # ไฟล์ subagent (YAML/JSON)
+├── workflows/            # Workflow (.md/.yaml)
+├── modes/                # Custom mode ละไฟล์ JSON
+├── github/               # GitHub Action และสคริปต์ release
+├── packages/             # โค้ดเสริม (เช่น web-template)
+├── plugins/              # โครงปลั๊กอิน/สคริปต์เสริม
+├── references/           # เอกสารเชิงอ้างอิง
+├── template/README.md    # แนวทาง bundle (ไม่มี payload แล้ว)
+├── .kilocode/            # พื้นที่ทำงานของเอเจนต์ (อย่าส่งต่อให้ผู้ใช้)
+└── .github/workflows/    # CI/CD release
 ```
 
-## ไฟล์สำคัญ
+> หมายเหตุ: เดิมเคยมี `template/.kilocode/**` และ `.kilocodemodes` แต่ปัจจุบันไฟล์ที่ต้องส่งให้ผู้ใช้ถูกแยกออกมาเป็นโฟลเดอร์ระดับ root (`agents/`, `skills/`, `workflows/`, `modes/` ฯลฯ) ตามความต้องการล่าสุด ส่วน `.kilocode/` ที่เหลืออยู่ใน repo ใช้เป็น sandbox ของเอเจนต์เท่านั้น ไม่ควรถูก copy ไปยังปลายทาง
 
-- **`.kilocodemodes`** - Custom modes สำหรับ Kilo Code (JSON format)
-- **`.kilocode/skills/`** - Skills แต่ละตัวมี SKILL.md เป็นไฟล์หลัก
-- **`.kilocode/rules-*/`** - Custom rules สำหรับแต่ละ mode
-- **`.kilocode/subagents/`** - Subagent configs (YAML/JSON)
-- **`.kilocode/workflows/`** - Workflow definitions
+## โฟลเดอร์สำคัญ
 
-## Custom Modes ปัจจุบัน (8 โหมด)
+- **`modes/`** – Custom modes ทีละไฟล์ JSON (slug.json)
+- **`skills/{skill-name}/SKILL.md`** – เนื้อหา skill หลัก ๆ
+- **`agents/*.yaml`** – แม่แบบ agent ที่เผยแพร่
+- **`subagents/*.yaml`** – delegate config ที่ orchestrator เรียกใช้
+- **`workflows/*.md`** – Workflow พร้อมขั้นตอน
+- **`github/`** – สคริปต์ release / composite action
+- **`references/`** – เอกสารอ้างอิงสำหรับ contributor
+- **`.kilocode/`** – sandbox/evidence ของเอเจนต์ (เก็บไว้เฉพาะใน repo)
+
+## Custom Modes ปัจจุบัน (8 โหมด – เก็บใน `modes/*.json`)
 
 | Slug | Name | Description |
 |------|------|-------------|
@@ -38,19 +51,19 @@ kilo-toolkit/
 | `orchestrator` | 🎯 Orchestrator | ประสานงาน task + Prompt Architect subagent |
 | `session-learner` | 🧠 Session Learner | Session history analysis |
 
-## Subagents
+## Subagents (`subagents/`)
 
 | Name | Description |
 |------|-------------|
 | `prompt-architect` | AI Agent สำหรับ Prompt Engineering (สร้าง/ปรับปรุง/วิเคราะห์ Prompt) |
 
-## Workflows
+## Workflows (`workflows/`)
 
 | Name | Description |
 |------|-------------|
 | `frontend-workflow.md` | Frontend development workflow (init project, add shadcn, create component, responsive) |
 
-## Skills
+## Skills (`skills/`)
 
 | Name | Description |
 |------|-------------|
@@ -60,11 +73,11 @@ kilo-toolkit/
 
 ---
 
-# 📝 โน๊ตข้อผิดพลาดและ待处理事项
+# 📝 โน๊ตข้อผิดพลาดและรายการที่ต้องทำ
 
 ## ข้อผิดพลาดที่พบ
 
-### 1. YAML Error ใน `.kilocode/agents/topic-tagger.yaml`
+### 1. YAML Error ใน `agents/topic-tagger.yaml`
 ```
 - YAML Error: 18 | 1. อ่านไฟล์ Markdown + keywords จากผู้ใช้ : Implicit keys need to be on a single line
 - YAML Error: 18 | 1. อ่านไฟล์ Markdown + keywords จากผู้ใช้ : Implicit map keys need to be followed by map values
@@ -81,11 +94,11 @@ kilo-toolkit/
 
 ---
 
-## 待处理事项 (TODO)
+## รายการที่ต้องทำ (TODO)
 
 ### 🔴 High Priority
 
-1. **แก้ไข YAML Error ใน `topic-tagger.yaml`**
+1. **แก้ไข YAML Error ใน `agents/topic-tagger.yaml`**
    - ปัญหา: Thai characters ใน YAML keys ทำให้เกิด parse error
    - วิธีแก้: ใช้ English keys หรือ quote Thai characters
 
@@ -100,7 +113,7 @@ kilo-toolkit/
    - อธิบายวิธีใช้แต่ละ mode
    - อธิบายวิธีเพิ่ม skill/workflow/subagent ใหม่
 
-4. **ตรวจสอบ prompt-architect.yaml subagent**
+4. **ตรวจสอบ `subagents/prompt-architect.yaml`**
    - ต้องใช้ได้จริงเมื่อ orchestrator delegate
 
 ### 🟢 Low Priority
@@ -112,7 +125,7 @@ kilo-toolkit/
 
 ## สิ่งที่ทำเสร็จแล้ว (2026-03-25)
 
-- ✅ เพิ่ม orchestrator mode ใน `.kilocodemodes`
+- ✅ เพิ่ม orchestrator mode ใน `modes/`
 - ✅ สร้าง prompt-architect subagent
 - ✅ เพิ่ม Prompt Architect v2.5.0 logic ครบ 11 โมดูลใน customInstructions
 - ✅ สร้าง frontend-workflow.md
@@ -129,14 +142,14 @@ kilo-toolkit/
 # 2. Switch ไปใช้ orchestrator mode
 /mode orchestrator
 
-# 3. ทดสอบ /创建 (สร้าง Prompt ใหม่)
-/创建
+# 3. ทดสอบ /create (สร้าง Prompt ใหม่)
+/create
 
-# 4. ทดสอบ /优化 (ปรับปรุง Prompt)
-/优化
+# 4. ทดสอบ /optimize (ปรับปรุง Prompt)
+/optimize
 
-# 5. ทดสอบ /分析 (วิเคราะห์ Prompt)
-/分析
+# 5. ทดสอบ /diagnose (วิเคราะห์ Prompt)
+/diagnose
 ```
 
 ---
@@ -144,3 +157,7 @@ kilo-toolkit/
 ## การติดต่อ
 
 หากพบปัญหาหรือมีคำถาม กรุณาสร้าง Issue ใน repo นี้
+
+
+
+
