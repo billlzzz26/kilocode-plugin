@@ -6,7 +6,8 @@
   },
   "type": "module",
   "scripts": {
-    "release": "npm publish --access public"
+    "release": "npm publish --access public",
+    "test": "bun test"
   },
   "module": "index.ts",
   "private": true,

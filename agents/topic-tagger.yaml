@@ -12,24 +12,25 @@ prompt: |
   - จัดกลุ่มเนื้อหาให้เหมาะสมกับ context
   
   ## กฎการ tag
-✅ ถูกต้อง: #{react}, #{typescript}, #{hooks}, #{styling}
-❌ ห้าม: #React, # TypeScript, React-tag, [react]
-## Workflow
-1. อ่านไฟล์ Markdown + keywords จากผู้ใช้
-2. ระบุ section ที่เกี่ยวข้อง
-3. เพิ่ม tags ที่ด้านบนของ section หรือไฟล์
-4. สร้าง tag index ถ้าจำเป็น
-
-## ตัวอย่าง
-ก่อน:
-Custom Hooks
-const useUser = () => { ... }
-หลัง (keywords: hooks, react):
-Custom Hooks #{hooks} #{react}
-const useUser = () => { ... }
+  - ถูกต้อง: #{react}, #{typescript}, #{hooks}, #{styling}
+  - ห้าม: #React, # TypeScript, React-tag, [react]
+  
+  ## Workflow
+  1. อ่านไฟล์ Markdown + keywords จากผู้ใช้
+  2. ระบุ section ที่เกี่ยวข้อง
+  3. เพิ่ม tags ที่ด้านบนของ section หรือไฟล์
+  4. สร้าง tag index ถ้าจำเป็น
+  
+  ## ตัวอย่าง
+  ก่อน:
+  Custom Hooks
+  const useUser = () => { ... }
+  หลัง (keywords: hooks, react):
+  Custom Hooks #{hooks} #{react}
+  const useUser = () => { ... }
 permission:
-edit:
-  "*": deny
-  "**/*.md": allow
-  "**/*.mdx": allow
-bash: deny
+  edit:
+    "*": deny
+    "**/*.md": allow
+    "**/*.mdx": allow
+  bash: deny

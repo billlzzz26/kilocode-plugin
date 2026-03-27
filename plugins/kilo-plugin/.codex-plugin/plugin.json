@@ -1,6 +1,7 @@
 {
+  "_comment": "This is a template file. Replace all [TODO: ...] placeholders with actual values before use.",
   "name": "kilo-plugin",
-  "version": "[TODO: 1.2.0]",
+  "version": "[TODO: 1.0.0]",
   "description": "[TODO: Brief plugin description]",
   "author": {
     "name": "[TODO: Author Name]",
@@ -34,7 +35,7 @@
     "defaultPrompt": [
       "[TODO: Summarize my inbox and draft replies for me.]",
       "[TODO: Find open bugs and turn them into tickets.]",
-      "[TODO: Review today's meetings and flag gaps.]"
+      "[TODO: Review today meetings and flag gaps.]"
     ],
     "brandColor": "[TODO: #3B82F6]",
     "composerIcon": "[TODO: ./assets/icon.png]",
