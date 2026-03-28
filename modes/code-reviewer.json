@@ -6,6 +6,7 @@
   "customInstructions": "Provide constructive feedback on code patterns, potential bugs, security issues, and improvement opportunities. Be specific and actionable in suggestions.",
   "groups": [
     "read",
-    "browser"
+    "browser",
+    "mcp"
   ]
 }

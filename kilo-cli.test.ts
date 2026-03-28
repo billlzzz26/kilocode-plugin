@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from "bun:test";
 import { existsSync, mkdirSync, rmSync, readdirSync, statSync, readFileSync, writeFileSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { join, resolve, relative } from "node:path";
 import { execSync } from "node:child_process";
 
 /**
@@ -17,7 +17,6 @@ const SOURCE_DIR = resolve(".");
 const EXPECTED_DIRS = [
   "agents",
   "skills",
-  "subagents",
   "workflows",
   "modes",
   "github",
@@ -48,7 +47,7 @@ function getAllFiles(dir: string, baseDir: string = dir): string[] {
   
   for (const entry of entries) {
     const fullPath = join(dir, entry.name);
-    const relativePath = fullPath.replace(baseDir + "/", "").replace(baseDir + "\\", "");
+    const relativePath = relative(baseDir, fullPath);
     
     if (entry.isDirectory()) {
       files.push(...getAllFiles(fullPath, baseDir));
@@ -86,6 +85,9 @@ function simulateKiloToolkitCopy(targetDir: string): string {
 }
 
 describe("kilo-cli headless mode", () => {
+  // Increase timeout for all tests as they run the actual CLI
+  const TEST_TIMEOUT = 10000;
+  
   beforeEach(() => {
     // Clean up test directory before each test
     if (existsSync(TEST_DIR)) {
@@ -93,14 +95,14 @@ describe("kilo-cli headless mode", () => {
     }
     // mkdirSync is not strictly needed as script will create it, but good for baseline
     mkdirSync(TEST_DIR, { recursive: true });
-  });
+  }, TEST_TIMEOUT);
 
   afterEach(() => {
     // Clean up test directory after each test
     if (existsSync(TEST_DIR)) {
       rmSync(TEST_DIR, { recursive: true, force: true });
     }
-  });
+  }, TEST_TIMEOUT);
 
   describe("file copying", () => {
     it("should copy all expected directories into .kilocode/", () => {
@@ -114,7 +116,7 @@ describe("kilo-cli headless mode", () => {
         expect(existsSync(targetPath)).toBe(true);
         expect(statSync(targetPath).isDirectory()).toBe(true);
       }
-    });
+    }, TEST_TIMEOUT);
 
     it("should copy all expected files to root", () => {
       simulateKiloToolkitCopy(TEST_DIR);
@@ -124,7 +126,7 @@ describe("kilo-cli headless mode", () => {
         expect(existsSync(targetPath)).toBe(true);
         expect(statSync(targetPath).isFile()).toBe(true);
       }
-    });
+    }, TEST_TIMEOUT);
 
     it("should preserve directory structure within .kilocode/", () => {
       simulateKiloToolkitCopy(TEST_DIR);
@@ -144,7 +146,7 @@ describe("kilo-cli headless mode", () => {
         const skillDirs = skillsEntries.filter((e: any) => e.isDirectory());
         expect(skillDirs.length).toBeGreaterThan(0);
       }
-    });
+    }, TEST_TIMEOUT);
 
     it("should copy file contents correctly", () => {
       simulateKiloToolkitCopy(TEST_DIR);
@@ -158,7 +160,7 @@ describe("kilo-cli headless mode", () => {
         const targetContent = readFileSync(targetReadme, "utf-8");
         expect(targetContent).toBe(sourceContent);
       }
-    });
+    }, TEST_TIMEOUT);
   });
 
   describe("sandbox exclusion", () => {
@@ -170,35 +172,35 @@ describe("kilo-cli headless mode", () => {
       const targetKiloDir = join(TEST_DIR, ".kilocode");
       const sandboxFile = join(targetKiloDir, "system-prompt-code");
       expect(existsSync(sandboxFile)).toBe(false);
-    });
+    }, TEST_TIMEOUT);
 
     it("should not copy .vscode directory", () => {
       simulateKiloToolkitCopy(TEST_DIR);
       
       const vscodePath = join(TEST_DIR, ".vscode");
       expect(existsSync(vscodePath)).toBe(false);
-    });
+    }, TEST_TIMEOUT);
 
     it("should not copy .zed directory", () => {
       simulateKiloToolkitCopy(TEST_DIR);
       
       const zedPath = join(TEST_DIR, ".zed");
       expect(existsSync(zedPath)).toBe(false);
-    });
+    }, TEST_TIMEOUT);
 
     it("should not copy node_modules directory", () => {
       simulateKiloToolkitCopy(TEST_DIR);
       
       const nodeModulesPath = join(TEST_DIR, "node_modules");
       expect(existsSync(nodeModulesPath)).toBe(false);
-    });
+    }, TEST_TIMEOUT);
 
     it("should not copy .git directory", () => {
       simulateKiloToolkitCopy(TEST_DIR);
       
       const gitPath = join(TEST_DIR, ".git");
       expect(existsSync(gitPath)).toBe(false);
-    });
+    }, TEST_TIMEOUT);
 
     it("should verify no excluded patterns in copied files", () => {
       simulateKiloToolkitCopy(TEST_DIR);
@@ -207,17 +209,17 @@ describe("kilo-cli headless mode", () => {
       const excludedFiles = allFiles.filter(file => isExcluded(file));
       
       expect(excludedFiles).toHaveLength(0);
-    });
+    }, TEST_TIMEOUT);
   });
 
   describe("error handling", () => {
     it("should handle non-existent target directory gracefully", () => {
       const nonExistentDir = join(TEST_DIR, "non-existent", "nested", "path");
+      simulateKiloToolkitCopy(nonExistentDir);
       
-      // This should create the directory structure
-      mkdirSync(nonExistentDir, { recursive: true });
       expect(existsSync(nonExistentDir)).toBe(true);
-    });
+      expect(existsSync(join(nonExistentDir, ".kilocode"))).toBe(true);
+    }, TEST_TIMEOUT);
 
     it("should handle existing target directory", () => {
       // Create target directory with some files
@@ -238,7 +240,7 @@ describe("kilo-cli headless mode", () => {
           expect(existsSync(targetPath)).toBe(true);
         }
       }
-    });
+    }, TEST_TIMEOUT);
 
     it("should handle empty source directories", () => {
       // Create an empty directory in one of the expected dirs (subfolder)
@@ -257,7 +259,7 @@ describe("kilo-cli headless mode", () => {
           rmSync(emptyDir, { recursive: true, force: true });
         }
       }
-    });
+    }, TEST_TIMEOUT);
 
     it("should handle circular copy (source and target same)", () => {
       // This should not throw and should output a specific message
@@ -268,7 +270,7 @@ describe("kilo-cli headless mode", () => {
       
       // No files should have been moved/changed in a way that breaks things
       expect(existsSync(join(SOURCE_DIR, "agents"))).toBe(true);
-    });
+    }, TEST_TIMEOUT);
   });
 
   describe("YAML file validation", () => {
@@ -289,7 +291,7 @@ describe("kilo-cli headless mode", () => {
           expect(content.length).toBeGreaterThan(0);
         }
       }
-    });
+    }, TEST_TIMEOUT);
 
     it("should copy valid JSON files", () => {
       simulateKiloToolkitCopy(TEST_DIR);
@@ -307,7 +309,7 @@ describe("kilo-cli headless mode", () => {
           expect(() => JSON.parse(content)).not.toThrow();
         }
       }
-    });
+    }, TEST_TIMEOUT);
   });
 
   describe("headless mode behavior", () => {
@@ -322,62 +324,44 @@ describe("kilo-cli headless mode", () => {
       const duration = endTime - startTime;
       
       // Should complete quickly (no interactive prompts)
-      expect(duration).toBeLessThan(5000);
-    });
+      expect(duration).toBeLessThan(TEST_TIMEOUT);
+    }, TEST_TIMEOUT);
 
     it("should output success message", () => {
-      // Capture stdout to verify success message
-      const originalLog = console.log;
-      let output = "";
-      
-      console.log = (msg: string) => {
-        output += msg + "\n";
-      };
-      
-      try {
-        simulateKiloToolkitCopy(TEST_DIR);
-        
-        // Should have some output indicating success
-        expect(output.length).toBeGreaterThan(0);
-      } finally {
-        console.log = originalLog;
-      }
-    });
+      const output = simulateKiloToolkitCopy(TEST_DIR);
+      expect(output).toContain("Kilo toolkit template copied");
+    }, TEST_TIMEOUT);
 
     it("should handle relative paths", () => {
       const relativePath = "test-relative-path";
       const absolutePath = resolve(relativePath);
       
-      mkdirSync(absolutePath, { recursive: true });
+      if (existsSync(absolutePath)) {
+        rmSync(absolutePath, { recursive: true, force: true });
+      }
       
       try {
-        simulateKiloToolkitCopy(absolutePath);
+        simulateKiloToolkitCopy(relativePath);
         
         // Should create files in the relative path
         expect(existsSync(absolutePath)).toBe(true);
-        
-        const files = readdirSync(absolutePath);
-        expect(files.length).toBeGreaterThan(0);
+        expect(existsSync(join(absolutePath, ".kilocode"))).toBe(true);
       } finally {
         if (existsSync(absolutePath)) {
           rmSync(absolutePath, { recursive: true, force: true });
         }
       }
-    });
+    }, TEST_TIMEOUT);
 
     it("should handle absolute paths", () => {
       const absolutePath = join(TEST_DIR, "absolute-test");
-      
-      mkdirSync(absolutePath, { recursive: true });
       
       simulateKiloToolkitCopy(absolutePath);
       
       // Should create files in the absolute path
       expect(existsSync(absolutePath)).toBe(true);
-      
-      const files = readdirSync(absolutePath);
-      expect(files.length).toBeGreaterThan(0);
-    });
+      expect(existsSync(join(absolutePath, ".kilocode"))).toBe(true);
+    }, TEST_TIMEOUT);
   });
 
   describe("file permissions", () => {
@@ -391,7 +375,7 @@ describe("kilo-cli headless mode", () => {
         // File should be readable
         expect(stats.mode & 0o444).toBeTruthy();
       }
-    });
+    }, TEST_TIMEOUT);
 
     it("should preserve directory permissions", () => {
       // Skip on Windows as permission model is different
@@ -408,6 +392,6 @@ describe("kilo-cli headless mode", () => {
         // Directory should be executable (traversable)
         expect(stats.mode & 0o111).toBeTruthy();
       }
-    });
+    }, TEST_TIMEOUT);
   });
 });

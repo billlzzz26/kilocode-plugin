@@ -19,7 +19,7 @@ const assetBuilds = [
 const runCommand = ({ command, args, cwd, label }) =>
   new Promise((resolve, reject) => {
     const useShell = process.platform === "win32";
-    const quotedCommand = useShell ? """ + command + """ : command;
+    const quotedCommand = useShell ? `"${command}"` : command;
 
     const child = spawn(quotedCommand, args, {
       cwd,

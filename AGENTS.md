@@ -27,19 +27,20 @@ kilo-toolkit/
 
 ```
 1. อ่าน `process.argv` เพื่อหา target directory
-2. Copy โฟลเดอร์ payload หลัก (`agents/`, `skills/`, `subagents/`, `workflows/`, `modes/`, `github/` ที่จำเป็น, `references/` หากต้องการแนบคู่มือ) ไปยังปลายทาง
-3. ไม่ copy `.kilocode/`, `.vscode/`, `.zed/` หรือไฟล์ sandbox อื่น
-4. สร้าง README.md ปลายทาง (สามารถ reuse `README.md` ปัจจุบัน) และแสดงข้อความ `Kilo toolkit template copied to [path]`
+2. Copy โฟลเดอร์ payload หลัก (`agents/`, `skills/`, `subagents/`, `workflows/`, `modes/`, `github/` ที่จำเป็น, `references/` หากต้องการแนบคู่มือ) ไปยังโฟลเดอร์ `.kilocode/` ที่ปลายทาง เพื่อให้ Kilo Code อ่านค่าเป็น project-level config ได้ทันที
+3. ไม่ copy `.kilocode/` (sandbox จากต้นทาง), `.vscode/`, `.zed/` หรือไฟล์ sandbox อื่น ๆ
+4. สร้าง README.md และ AGENTS.md ที่ root ของปลายทาง และแสดงข้อความ `Kilo toolkit template copied to [path]`
 ```
 
-### 3. **จัดการไฟล์สำคัญ**
+### 3. จัดการไฟล์สำคัญ
 
-- **`modes/`** - Custom modes (โฟลเดอร์ไฟล์ JSON ต่อ slug)
-- **`skills/`** - Skills แต่ละตัวมี SKILL.md เป็นไฟล์หลัก
-- **`agents/`** - Agent templates (YAML/MD)
-- **`subagents/`** - Subagent configs (YAML/JSON)
-- **`workflows/`** - Workflow definitions
-- **`.kilocode/`** - sandbox สำหรับเอเจนต์ (ไม่ให้ผู้ใช้)
+- **`.kilocode/modes/`** - Custom modes (โฟลเดอร์ไฟล์ JSON ต่อ slug)
+- **`.kilocode/skills/`** - Skills แต่ละตัวมี SKILL.md เป็นไฟล์หลัก
+- **`.kilocode/agents/`** - Agent templates (YAML/MD)
+- **`.kilocode/subagents/`** - Subagent configs (YAML/JSON)
+- **`.kilocode/workflows/`** - Workflow definitions
+- **`.kilocode/`** - ตำแหน่งหลักสำหรับไฟล์คอนฟิกทั้งหมดของโปรเจกต์
+- **`.kilocode/` (sandbox)** - sandbox สำหรับเอเจนต์ใน repo ต้นทาง (ไม่ให้ผู้ใช้)
 
 ### 4. **กฎการแก้ไขไฟล์**
 
