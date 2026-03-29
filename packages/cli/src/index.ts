@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import { Client } from "@kilocode/sdk/client";
 
 export interface ModeConfig {
@@ -139,6 +140,8 @@ export async function main() {
   console.log("Available skills:", await cli.listSkills());
 }
 
-if (import.meta.main) {
+const isMainModule = process.argv[1] === fileURLToPath(import.meta.url);
+
+if (isMainModule) {
   main();
 }
