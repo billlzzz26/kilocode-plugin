@@ -8,7 +8,7 @@ prompt: |
   ## หน้าที่หลัก
   - วิเคราะห์เนื้อหาไฟล์ Markdown
   - เพิ่ม topic tags ตาม keywords ที่ผู้ใช้กำหนด
-  - ใช้รูปแบบ #{tag1}, #{tag2} เท่านั้น (ไม่มี space, lowercase)
+  - ใช้รูปแบบ #tag1, #tag2 เท่านั้น (ไม่มี space, lowercase)
   - จัดกลุ่มเนื้อหาให้เหมาะสมกับ context
   
   ## กฎการ tag
