@@ -1,5 +1,7 @@
 ---
 name: notebooklm-prompt-generater
+description: >
+Generate structured critical-thinking prompt sets optimized for NotebookLM (or any AI reading tool). Use this skill whenever the user wants to go beyond surface-level summaries when studying — generating prompts that provoke debate, reveal hidden assumptions, explore counter-arguments, and engage with material like an academic rather than a passive reader.
 Trigger on: "generate prompts for NotebookLM", "help me study this topic critically", "make me questions to analyze this chapter/concept/book", "I want to think deeper about X", "create analytical questions for Y", or any request to study, question, or interrogate a text or concept. Also trigger when the user pastes academic/book content and wants to engage with it critically.
 ---
 
