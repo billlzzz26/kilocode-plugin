@@ -17,7 +17,7 @@ const SOURCE_DIR = resolve(".");
 const EXPECTED_DIRS = [
   "agents",
   "skills",
-  "workflows",
+  "subagents",
   "modes",
   "github",
   "references",
