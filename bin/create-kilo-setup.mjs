@@ -69,7 +69,16 @@ async function handleModes(action) {
     const fs = await import('node:fs');
     const modesDir = join(SOURCE_DIR, 'modes');
     if (existsSync(modesDir)) {
+      const targetDir = join(process.cwd(), '.kilocode', 'modes');
+      if (!existsSync(targetDir)) {
+        mkdirSync(targetDir, { recursive: true });
+      }
       const files = fs.readdirSync(modesDir).filter(f => f.endsWith('.json'));
+      for (const file of files) {
+        const from = join(modesDir, file);
+        const to = join(targetDir, file);
+        cpSync(from, to);
+      }
       console.log('\n📤 Exported modes to .kilocode/modes/:');
       files.forEach(f => console.log(`  - ${f}`));
     }
