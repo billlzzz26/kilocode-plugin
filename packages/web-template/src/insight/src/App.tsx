@@ -30,8 +30,10 @@ function InsightApp({ data }: { data: InsightData }) {
       return;
     }
 
+    let clone: HTMLElement | null = null;
+
     try {
-      const clone = card.cloneNode(true) as HTMLElement;
+      clone = card.cloneNode(true) as HTMLElement;
       clone.style.position = 'fixed';
       clone.style.left = '-9999px';
       clone.style.top = '0';
@@ -46,8 +48,6 @@ function InsightApp({ data }: { data: InsightData }) {
         height: clone.scrollHeight,
       });
 
-      document.body.removeChild(clone);
-
       const imgData = canvas.toDataURL('image/png');
       const link = document.createElement('a');
       link.href = imgData;
@@ -56,6 +56,10 @@ function InsightApp({ data }: { data: InsightData }) {
     } catch (error) {
       console.error('Export card error:', error);
       alert('Failed to export card. Please try again.');
+    } finally {
+      if (clone && clone.parentNode) {
+        clone.parentNode.removeChild(clone);
+      }
     }
   };
 
