@@ -512,9 +512,15 @@ function QwenMdAdditionsSection({
 
     if (!textToCopy) return;
 
-    navigator.clipboard.writeText(textToCopy).then(() => {
-      setCopiedAll(true);
-      setTimeout(() => setCopiedAll(false), 2000);
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => {
+        setCopiedAll(true);
+        setTimeout(() => setCopiedAll(false), 2000);
+      })
+      .catch(() => {
+        // Optionally, you could surface an error state here instead
+        setCopiedAll(false);
     });
   };
 
