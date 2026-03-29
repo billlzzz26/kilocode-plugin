@@ -5,16 +5,29 @@
     "kilo-toolkit": "./bin/create-kilo-setup.mjs"
   },
   "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "release": "npm publish --access public"
+    "release": "npm publish --access public",
+    "test": "bun test"
   },
   "module": "index.ts",
   "private": true,
   "devDependencies": {
     "@types/bun": "latest",
+    "biome": "^0.3.3",
     "shadcn": "^4.1.0"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "peerDependenciesMeta": {
+    "@kilocode/sdk": {
+      "optional": true
+    },
+    "@kilocode/plugin": {
+      "optional": true
+    }
   }
 }

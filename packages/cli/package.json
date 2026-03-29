@@ -1,0 +1,22 @@
+{
+  "name": "@kilo-plugin/cli",
+  "version": "1.0.0",
+  "description": "Kilo CLI tools using @kilocode/sdk for mode and skill management",
+  "type": "module",
+  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./modes": "./src/modes.ts",
+    "./skills": "./src/skills.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@kilocode/sdk": "^7.1.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.3.3"
+  }
+}

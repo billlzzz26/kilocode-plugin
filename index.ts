@@ -1,1 +1,1 @@
-console.log("Hello via Bun!");
+export { INSIGHT_JS, INSIGHT_CSS } from "@kilo-plugin/web-templates";
