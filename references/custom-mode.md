@@ -317,7 +317,7 @@ You can provide instructions for custom modes using dedicated files or directori
 
 ### Preferred Method: Directory (`.kilo/rules-{mode-slug}/`)
 
-```
+```text
 .
 ├── .kilo/
 │   └── rules-docs-writer/  # Example for mode slug "docs-writer"
@@ -497,23 +497,3 @@ customModes:
       - read
       - browser
 ```
-
-## Troubleshooting
-
-### Common Issues
-
-- **Mode not appearing:** After creating or importing a mode, you may need to reload the VS Code window
-- **Invalid regex patterns:** Test your patterns using online regex testers before applying them
-- **Precedence confusion:** Remember that project modes completely override global modes with the same slug
-- **YAML syntax errors:** Use proper indentation (spaces, not tabs) and validate your YAML
-
-### Tips for Working with YAML
-
-- **Indentation is Key:** YAML uses indentation (spaces, not tabs) to define structure
-- **Colons for Key-Value Pairs:** Keys must be followed by a colon and a space (e.g., `slug: my-mode`)
-- **Hyphens for List Items:** List items start with a hyphen and a space (e.g., `- read`)
-- **Validate Your YAML:** Use online YAML validators or your editor's built-in validation
-
-## Community Gallery
-
-Ready to explore more? Check out the [Show and Tell](https://github.com/Kilo-Org/kilocode/discussions/categories/show-and-tell) to discover and share custom modes created by the community!
