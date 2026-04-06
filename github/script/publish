@@ -22,7 +22,7 @@ echo "Latest tag: $latest_tag"
 git tag -d latest
 git push origin :refs/tags/latest
 git tag -a latest $latest_tag -m "Update latest to $latest_tag"
-git push origin lat
+git push origin latest
   # Update latest tag
   git tag -d latest
   git push origin :refs/tags/latest
