@@ -1,211 +1,208 @@
 ---
-name: notebooklm-prompt-generater
-description: Generate structured critical-thinking prompt sets optimized for NotebookLM (or any AI reading tool). Use this skill whenever the user wants to go beyond surface-level summaries when studying — generating prompts that provoke debate, reveal hidden assumptions, explore counter-arguments, and engage with material like an academic rather than a passive reader.
-Trigger on: "generate prompts for NotebookLM", "help me study this topic critically", "make me questions to analyze this chapter/concept/book", "I want to think deeper about X", "create analytical questions for Y", or any request to study, question, or interrogate a text or concept. Also trigger when the user pastes academic/book content and wants to engage with it critically.
+name: notebooklm-prompt-generator
+description: สร้างชุดข้อคำถามคิดวิเคราะห์แบบมีโครงสร้างที่ปรับให้เหมาะสมสำหรับ NotebookLM (หรือเครื่องมือ AI อ่านอื่นๆ) ใช้ skill นี้เมื่อใดก็ตามที่ผู้ใช้ต้องการเกินกว่าการสรุปพื้นผิว เมื่อศึกษา — สร้างข้อคำถามที่กระตุ้นการถกเถียง เปิดเผยสมมติฐานที่ซ่อนอยู่ สำรวจข้อโต้แย้ง และมีส่วนร่วมกับเนื้อหาเหมือนนักวิชาการแทนที่จะเป็นผู้อ่านแบบเฉยๆ
+Trigger on: "generate prompts for NotebookLM", "help me study this topic critically", "make me questions to analyze this chapter/concept/book", "I want to think deeper about X", "create analytical questions for Y", หรือคำขอใดๆ ในการศึกษา ตั้งคำถาม หรือตรวจสอบข้อความหรือแนวคิด นอกจากนี้ยังทำให้เกิดการทำงานเมื่อผู้ใช้วางเนื้อหาทางวิชาการ/หนังสือและต้องการมีส่วนร่วมกับมันอย่างมีวิจารณญาณ
 ---
 
-# NotebookLM Critical-Thinking Prompt Generator
+# ตัวสร้างข้อคำถามคิดวิเคราะห์สำหรับ NotebookLM
 
-You help students and researchers move from passive reading to active intellectual engagement by generating
-structured prompt sets they can paste directly into NotebookLM (or similar tools).
+คุณช่วยให้นักเรียนและนักวิจัยเปลี่ยนจากการอ่านแบบเฉยๆ ไปเป็นการมีส่วนร่วมทางปัญญาที่กระตุ้นโดยการสร้างชุดข้อคำถามที่มีโครงสร้างซึ่งพวกเขาสามารถวางลงใน NotebookLM (หรือเครื่องมือที่คล้ายกัน) ได้โดยตรง
 
-The goal is not summary — it's productive intellectual friction. Each prompt should force the AI
-to take sides, reveal tensions, construct opponents, or stress-test assumptions.
-
----
-
-## Workflow
-
-### Step 1: Gather Input
-
-Ask the user for (if not already provided):
-1. **Topic or concept** — what are they studying? (e.g., "Foucault's concept of power", "supply and demand", "Chapter 3 on the French Revolution")
-2. **Depth level** — quick study session (3–5 prompts) or deep dive (all 10 lenses)?
-3. **Which lenses** — all 10, or specific ones? (show the menu below if unsure)
-
-If the user provides a text/passage directly, extract the core concept automatically and proceed.
-
-### Step 2: Generate Prompts
-
-Apply the selected lenses to the topic. Each prompt must:
-- Name the topic explicitly inside the prompt (don't rely on context)
-- Use the improved structure: role priming + clear rules + output schema
-- Be copy-paste ready for NotebookLM
-
-Prefix every generated prompt with: `Considering the topic [TOPIC],`
-
-### Step 3: Format Output
-
-Output as a numbered list with clear headings per lens. Include a one-line "why this works" note
-in italics under each prompt so the user understands what intellectual move they're making.
+เป้าหมายไม่ใช่การสรุป — มันคือการสร้างแรงเสียดทานทางปัญญาที่มีประโยชน์ ข้อคำถามแต่ละข้อควรบังคับให้ AI เลือกข้าง เปิดเผยความตึงเครียด สร้างฝ่ายตรงข้าม หรือทดสอบสมมติฐาน
 
 ---
 
-## The 10 Critical Lenses
+## ขั้นตอนการทำงาน
 
-### 1. Dialectical Lens
-> For exposing that most ideas have a legitimate opposing reading grounded in the same text.
+### ขั้นตอนที่ 1: รวบรวมข้อมูลป้อนเข้า
 
-```
-You are a critical literary theorist.
-Considering the topic [TOPIC], create a debate between two scholars with opposing interpretations.
-- Each scholar must cite at least 2 passages from the source material.
-- Show what evidence each side uses to support their reading.
+ขอจากผู้ใช้ (หากไม่ได้ให้ไว้แล้ว):
+1. **หัวข้อหรือแนวคิด** — พวกเขากำลังศึกษาอะไร? (เช่น "แนวคิดเรื่องอำนาจของ Foucault", "อุปทานและอุปสงค์", "บทที่ 3 เกี่ยวกับการปฏิวัติฝรั่งเศส")
+2. **ระดับความลึก** — เซสชั่นศึกษาอย่างรวดเร็ว (3–5 ข้อคำถาม) หรือการศึกษาเชิงลึก (ทั้ง 10 มุมมอง)?
+3. **มุมมองใด** — ทั้งหมด 10 มุมมอง หรือมุมมองเฉพาะ? (แสดงเมนูด้านล่างหากไม่แน่ใจ)
 
-Output:
-**Scholar A Argument**: [points + evidence]
-**Scholar B Argument**: [points + evidence]
-**Synthesis**: 2–3 sentences comparing strengths of each position.
-```
+หากผู้ใช้ให้ข้อความ/ข้อความส่วนหนึ่งโดยตรง ให้แยกแนวคิดหลักโดยอัตโนมัติและดำเนินการต่อ
 
-### 2. Disillusionment Filter
-> For stress-testing beliefs — what breaks down when the idea meets reality?
+### ขั้นตอนที่ 2: สร้างข้อคำถาม
 
-```
-You are a reflective critic.
-Considering the topic [TOPIC], explain how a former believer became disillusioned with this idea.
-- Identify the passage(s) that once inspired them, and how they now reread those passages.
-- What triggered the shift in perspective?
-- End with a 50-word personal reflection in first person.
+นำมุมมองที่เลือกไปใช้กับหัวข้อ ข้อคำถามแต่ละข้อต้อง:
+- ตั้งชื่อหัวข้ออย่างชัดเจนภายในข้อคำถาม (อย่าพึ่งพาบริบท)
+- ใช้โครงสร้างที่ปรับปรุง: การกำหนดบทบาท + กฎที่ชัดเจน + schema ผลลัพธ์
+- พร้อมสำหรับการวางและคัดลอกใน NotebookLM
 
-Output sections: **Trigger** | **Re-interpretations** | **Reflection**
-```
+ใส่คำนำหน้าทุกข้อคำถามที่สร้างขึ้นด้วย: `เมื่อพิจารณาหัวข้อ [TOPIC],`
 
-### 3. Anti-Thesis Method
-> For revealing what an author silently depends on — the argument behind the argument.
+### ขั้นตอนที่ 3: จัดรูปแบบผลลัพธ์
+
+ส่งออกเป็นรายการลำดับเลขพร้อมหัวข้ออ่านชัดเจนต่อมุมมอง รวมหมายเหตุ "ทำไมสิ่งนี้ถึงได้ผล" บรรทัดเดียวเป็นตัวเอียงภายใต้ข้อคำถามแต่ละข้อเพื่อให้ผู้ใช้เข้าใจการเคลื่อนไหวทางปัญญาที่พวกเขากำลังทำ
+
+---
+
+## 10 มุมมองคิดวิเคราะห์
+
+### 1. มุมมอง辩证法 (Dialectical Lens)
+> สำหรับเปิดเผยว่าแนวคิดส่วนใหญ่มีการอ่านตรงข้ามที่ชอบธรรมซึ่งมีรากฐานจากข้อความเดียวกัน
 
 ```
-You are a debate coach.
-Considering the topic [TOPIC], construct the exact opposite of the author's central thesis.
-1. State the reversed thesis in ≤25 words.
-2. List at least 3 pieces of evidence the author would need to defend this reversal.
-3. Quote any lines from the text that accidentally support the opposing view.
+คุณเป็นนักวิจารณ์วรรณกรรมวิจารณ์
+เมื่อพิจารณาหัวข้อ [TOPIC] ให้สร้างการถกเถียงระหว่างนักวิชาการสองคนที่มีการตีความที่ตรงข้ามกัน
+- นักวิชาการแต่ละคนต้องอ้างอิงข้อความอย่างน้อย 2 ข้อจากเนื้อหาต้นฉบับ
+- แสดงให้เห็นว่าแต่ละฝ่ายใช้หลักฐานใดเพื่อสนับสนุนการอ่านของพวกเขา
 
-Output sections: **Reversed Thesis** | **Required Proof** | **Accidental Support**
+ผลลัพธ์:
+**อาร์กิวเมนต์ของนักวิชาการ A**: [จุด + หลักฐาน]
+**อาร์กิวเมนต์ของนักวิชาการ B**: [จุด + หลักฐาน]
+**การสังเคราะห์**: 2–3 ประโยคเปรียบเทียบจุดแข็งของแต่ละตำแหน่ง
 ```
 
-### 4. Spider-Web Perspective
-> For mapping the hidden ecosystem of assumptions an idea depends on.
+### 2. ตัวกรองความผิดหวัง (Disillusionment Filter)
+> สำหรับการทดสอบความเชื่อ — สิ่งใดที่พังทลายลงเมื่อแนวคิดเผชิญหน้ากับความเป็นจริง?
 
 ```
-You are a conceptual cartographer.
-Considering the topic [TOPIC], map all concepts connected to this central idea.
-Group them under four categories:
-- Assumptions it silently makes
-- Ideas it challenges or threatens
-- Concepts it depends on
-- Implications it creates downstream
+คุณเป็นนักวิจารณ์ที่ไตร่ตรอง
+เมื่อพิจารณาหัวข้อ [TOPIC] ให้อธิบายว่าผู้เชื่อเดิมกลายเป็นผู้หมดความหวังกับแนวคิดนี้อย่างไร
+- ระบุข้อความที่เคยสร้างแรงบันดาลใจให้พวกเขา และวิธีที่พวกเขาอ่านข้อความเหล่านั้นใหม่ในปัจจุบัน
+- สิ่งใดที่ทำให้เกิดการเปลี่ยนแปลงมุมมอง?
+- สิ้นสุดด้วยการสะท้อนส่วนตัว 50 คำในบุคคลที่หนึ่ง
 
-Output: bullet list — concept → one-line relation, grouped by category.
+ส่วนผลลัพธ์: **ตัวกระตุ้น** | **การตีความใหม่** | **การสะท้อน**
 ```
 
-### 5. Fictional Interview
-> For forcing the author to defend themselves against hard questions.
+### 3. วิธีการต่อต้านวิทยานิพนธ์ (Anti-Thesis Method)
+> สำหรับเปิดเผยว่าผู้เขียนขึ้นอยู่กับอะไรอย่างเงียบๆ — อาร์กิวเมนต์ที่อยู่เบื้องหลังอาร์กิวเมนต์
 
 ```
-You are an investigative journalist who never accepts vague answers.
-Considering the topic [TOPIC], conduct a Q&A with the author.
-- Write 5 tough questions a skeptic would ask.
-- Answer each using direct evidence from the text (cite passages).
-- Limit each answer to ≤70 words.
+คุณเป็นโค้ชการโต้แย้ง
+เมื่อพิจารณาหัวข้อ [TOPIC] ให้สร้างสิ่งที่ตรงข้ามกับวิทยานิพนธ์หลักของผู้เขียน
+1. ระบุวิทยานิพนธ์ที่กลับด้านใน ≤25 คำ
+2. แสดงรายการหลักฐานอย่างน้อย 3 ชิ้นที่ผู้เขียนจะต้องป้องกันการกลับด้านนี้
+3. อ้างอิงบรรทัดใดๆ จากข้อความที่สนับสนุนมุมมองตรงข้ามโดยไม่ตั้งใจ
 
-Output: **Question N** / **Answer N** format.
+ส่วนผลลัพธ์: **วิทยานิพนธ์ที่กลับด้าน** | **หลักฐานที่จำเป็น** | **การสนับสนุนโดยไม่ตั้งใจ**
 ```
 
-### 6. Unreliable Narrator Exercise
-> For reading critically — spotting what the author may not see about themselves.
+### 4. มุมมองเครือข่ายแมงมุม (Spider-Web Perspective)
+> สำหรับการแมประบบนิเวศที่ซ่อนอยู่ของสมมติฐานที่แนวคิดขึ้นอยู่กับ
 
 ```
-You are a narrative skeptic.
-Considering the topic [TOPIC], re-read this section assuming the author/narrator has blind spots.
-1. List 3 plausible biases the narrator might hold.
-2. For each bias, quote a sentence that supports the suspicion.
-3. Summarize what power dynamics or hidden agendas emerge in ≤100 words.
+คุณเป็นนักทำแผนที่แนวคิด
+เมื่อพิจารณาหัวข้อ [TOPIC] ให้แมปแนวคิดทั้งหมดที่เชื่อมต่อกับแนวคิดหลักนี้
+จัดกลุ่มไว้ภายใต้สี่หมวดหมู่:
+- สมมติฐานที่มันสร้างขึ้นอย่างเงียบๆ
+- แนวคิดที่มันท้าทายหรือคุกคาม
+- แนวคิดที่มันขึ้นอยู่กับ
+- ผลกระทบที่มันสร้างขึ้นในระยะยาว
 
-Output sections: **Biases** | **Quotes** | **Power Dynamics**
+ผลลัพธ์: รายการสัญลักษณ์แสดงหัวข้อ → ความสัมพันธ์บรรทัดเดียว จัดกลุ่มตามหมวดหมู่
 ```
 
-### 7. Cultural Mirror
-> For testing whether an idea is universal or culturally local.
+### 5. การสัมภาษณ์สมมติ (Fictional Interview)
+> สำหรับบังคับให้ผู้เขียนป้องกันตัวเองจากคำถามที่ยาก
 
 ```
-You are a comparative philosopher.
-Considering the topic [TOPIC], rewrite the core argument from three cultural/philosophical perspectives.
-- Stoic version (≤120 words, first person, include one cultural reference)
-- Sufi version (≤120 words, first person, include one cultural reference)
-- Post-modernist version (≤120 words, first person, include one cultural reference)
+คุณเป็นนักข่าวสอบสวนที่ไม่เคยยอมรับคำตอบที่คลุมเครือ
+เมื่อพิจารณาหัวข้อ [TOPIC] ให้ดำเนินการสัมภาษณ์ถาม-ตอบกับผู้เขียน
+- เขียนคำถามยาก 5 ข้อที่ผู้สงสัยจะถาม
+- ตอบแต่ละข้อโดยใช้หลักฐานโดยตรงจากข้อความ (อ้างอิงข้อความ)
+- จำกัดคำตอบแต่ละข้อไว้ที่ ≤70 คำ
 
-Output blocks: **Stoic Version** | **Sufi Version** | **Post-modern Version**
-No meta-commentary between blocks.
+ผลลัพธ์: รูปแบบ **คำถาม N** / **คำตอบ N**
 ```
 
-### 8. What-If Scenario
-> For stress-testing ideas against the messiness of real application.
+### 6. แบบฝึกหัดผู้บรรยายที่ไม่น่าเชื่อถือ (Unreliable Narrator Exercise)
+> สำหรับการอ่านอย่างมีวิจารณญาณ — การจับสิ่งที่ผู้เขียนอาจไม่เห็นเกี่ยวกับตัวเอง
 
 ```
-You are a policy analyst.
-Considering the topic [TOPIC], apply the central idea to a modern real-world dilemma.
-Outline:
-- **Intended Outcomes**: what would the author expect to happen?
-- **Unintended Consequences**: what could go wrong that the author didn't foresee?
-- **Mitigations**: how could these be addressed using the text's own logic?
+คุณเป็นผู้สงสัยเรื่องการบรรยาย
+เมื่อพิจารณาหัวข้อ [TOPIC] ให้อ่านส่วนนี้ใหม่โดยสมมติว่าผู้เขียน/ผู้บรรยายมีจุดบอด
+1. แสดงรายการอคติที่เป็นไปได้ 3 ข้อที่ผู้บรรยายอาจมี
+2. สำหรับแต่ละอคติ ให้อ้างอิงประโยคที่สนับสนุนการสงสัย
+3. สรุปว่าพลวัตอำนาจหรือวาระที่ซ่อนอยู่ใดที่เกิดขึ้น ≤100 คำ
 
-Use bullet points. Cite source material for each section.
+ส่วนผลลัพธ์: **อคติ** | **คำพูด** | **พลวัตอำนาจ**
 ```
 
-### 9. Future Scholar Perspective
-> For gaining distance — what will feel obvious, embarrassing, or genius in 100 years?
+### 7. กระจกวัฒนธรรม (Cultural Mirror)
+> สำหรับการทดสอบว่าแนวคิดเป็นสากลหรือเป็นท้องถิ่นทางวัฒนธรรม
 
 ```
-You are a historian writing in 2125.
-Considering the topic [TOPIC], critique this work from a 100-year vantage point.
-- List 3 elements now considered "Outdated" — include one quotation each.
-- List 3 elements deemed "Prescient" — include one quotation each.
-- Write a 40-word conclusion on the work's legacy.
+คุณเป็นนักปรัชญาเปรียบเทียบ
+เมื่อพิจารณาหัวข้อ [TOPIC] ให้เขียนอาร์กิวเมนต์หลักใหม่จากมุมมองทางวัฒนธรรม/ปรัชญาสามมุม
+- เวอร์ชัน Stoic (≤120 คำ บุคคลที่หนึ่ง รวมการอ้างอิงวัฒนธรรมหนึ่งข้อ)
+- เวอร์ชัน Sufi (≤120 คำ บุคคลที่หนึ่ง รวมการอ้างอิงวัฒนธรรมหนึ่งข้อ)
+- เวอร์ชัน Post-modernist (≤120 คำ บุคคลที่หนึ่ง รวมการอ้างอิงวัฒนธรรมหนึ่งข้อ)
 
-Output sections: **Outdated** | **Prescient** | **Conclusion**
-Do not add present-day opinion.
+บล็อกผลลัพธ์: **เวอร์ชัน Stoic** | **เวอร์ชัน Sufi** | **เวอร์ชัน Post-modern**
+ไม่มีข้อความเมตาระหว่างบล็อก
 ```
 
-### 10. Fragmented Mirror
-> For decomposing a single idea into the many disciplines that would argue over it.
+### 8. สถานการณ์สมมติ (What-If Scenario)
+> สำหรับการทดสอบแนวคิดจากความยุ่งเหยิงของการประยุกต์ใช้จริง
 
 ```
-You are a multidisciplinary analyst.
-Considering the topic [TOPIC], decompose this idea into four analytical lenses.
+คุณเป็นนักวิเคราะห์นโยบาย
+เมื่อพิจารณาหัวข้อ [TOPIC] ให้นำแนวคิดหลักไปใช้กับภาวะวิกฤตในโลกแห่งความเป็นจริงสมัยใหม่
+โครงร่าง:
+- **ผลลัพธ์ที่ตั้งใจ**: ผู้เขียนคาดว่าจะเกิดอะไรขึ้น?
+- **ผลกระทบที่ไม่ตั้งใจ**: สิ่งใดที่อาจผิดพลาดซึ่งผู้เขียนไม่ได้คาดการณ์?
+- **การบรรเทา**: สิ่งเหล่านี้สามารถแก้ไขได้อย่างไรโดยใช้ตรรกะของข้อความเอง?
 
-Return a Markdown table:
-| Lens | Interpretation | Tension / Overlap with other lenses |
-|------|---------------|--------------------------------------|
-| Emotional | ... | ... |
-| Philosophical | ... | ... |
-| Psychological | ... | ... |
-| Social | ... | ... |
+ใช้สัญลักษณ์แสดงหัวข้อ อ้างอิงเนื้อหาต้นฉบับสำหรับแต่ละส่วน
+```
 
-Return only the table. Ask a clarifying question if the idea is undefined.
+### 9. มุมมองนักวิชาการในอนาคต (Future Scholar Perspective)
+> สำหรับการได้รับระยะห่าง — สิ่งใดที่จะดูเห็นได้ชัด น่าอับอาย หรือเป็นอัจฉริยะใน 100 ปี
+
+```
+คุณเป็นนักประวัติศาสตร์เขียนในปี 2125
+เมื่อพิจารณาหัวข้อ [TOPIC] ให้วิจารณ์งานนี้จากมุมมองของ 100 ปี
+- แสดงรายการองค์ประกอบ 3 ข้อที่ถือว่า "ล้าสมัย" — รวมคำพูดหนึ่งข้อสำหรับแต่ละข้อ
+- แสดงรายการองค์ประกอบ 3 ข้อที่ถือว่า "มองเห็นอนาคตได้" — รวมคำพูดหนึ่งข้อสำหรับแต่ละข้อ
+- เขียนบทสรุป 40 คำเกี่ยวกับมรดกของงาน
+
+ส่วนผลลัพธ์: **ล้าสมัย** | **มองเห็นอนาคตได้** | **บทสรุป**
+อย่าเพิ่มความเห็นในปัจจุบัน
+```
+
+### 10. กระจกแตกสลาย (Fragmented Mirror)
+> สำหรับการแยกแนวคิดเดียวออกเป็นสาขาวิชาหลายสาขาที่จะถกเถียงกันเกี่ยว
+
+```
+คุณเป็นนักวิเคราะห์สหวิทยาการ
+เมื่อพิจารณาหัวข้อ [TOPIC] ให้แยกแนวคิดนี้ออกเป็นเลนส์วิเคราะห์สี่เลนส์
+
+ส่งคืนตารางเครื่องหมายลง:
+| เลนส์ | การตีความ | ความตึงเครียด / การทับซ้อนกับเลนส์อื่น |
+|------|-----------|--------------------------------------|
+| อารมณ์ | ... | ... |
+| ปรัชญา | ... | ... |
+| จิตวิทยา | ... | ... |
+| สังคม | ... | ... |
+
+ส่งคืนเฉพาะตาราง ถามคำถามชี้แจงหากแนวคิดไม่ชัดเจน
 ```
 
 ---
 
-## Output Format Example
+## ตัวอย่างรูปแบบผลลัพธ์
 
-When the user asks for "3 prompts on Hobbes' concept of the Leviathan":
-
----
-**Prompts for: Hobbes' concept of the Leviathan**
-
-**🔵 Lens 1 — Dialectical**
-> *Forces the text to argue against itself — exposes that authority can be read as both necessary and tyrannical.*
-[full prompt here]
-
-**🔴 Lens 3 — Anti-Thesis**
-> *Reveals what Hobbes silently assumes must be true for his argument to hold.*
-[full prompt here]
-
-**🟠 Lens 8 — What-If Scenario**
-> *Tests Hobbes against modern governance debates like social media regulation or AI policy.*
-[full prompt here]
+เมื่อผู้ใช้ขอ "3 ข้อคำถามเกี่ยวกับแนวคิดเรื่อง Leviathan ของ Hobbes":
 
 ---
+**ข้อคำถามสำหรับ: แนวคิดเรื่อง Leviathan ของ Hobbes**
 
-Always end with: "Paste any of these directly into NotebookLM after uploading your source material."
+**🔵 เลนส์ที่ 1 — Dialectical**
+> *บังคับให้ข้อความถกเถียงกับตัวเอง — เปิดเผยว่าอำนาจสามารถอ่านได้ทั้งว่าจำเป็นและเป็นเผด็จการ*
+[ข้อคำถามเต็มที่นี่]
+
+**🔴 เลนส์ที่ 3 — Anti-Thesis**
+> *เปิดเผยว่า Hobbes สมมติว่าต้องเป็นจริงเพื่อให้อาร์กิวเมนต์ของเขาถูกต้อง*
+[ข้อคำถามเต็มที่นี่]
+
+**🟠 เลนส์ที่ 8 — What-If Scenario**
+> *ทดสอบ Hobbes เทียบกับการถกเถียงการปกครองสมัยใหม่เช่นการควบคุมสื่อสังคมหรือนโยบาย AI*
+[ข้อคำถามเต็มที่นี่]
+
+---
+
+สิ้นสุดด้วยเสมอ: "วางข้อคำถามใดๆ เหล่านี้ลงใน NotebookLM โดยตรงหลังจากอัปโหลดเนื้อหาต้นฉบับของคุณ"
